@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Read Record</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .wrapper{
+            width: 600px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label>NIM</label>
+                        <p><b>{{ nim }}</b></p>
+                    </div>
+                    <form action="{{ url_for('update_2_execute') }}" method="post">
+                        <div class="form-group">
+                            <label>Nama</label>
+                            <input type="text" name="nama" class="form-control {% if nama_err %}is-invalid{% endif %}" value="{{ nama }}">
+                            <span class="invalid-feedback">{{ nama }}</span>
+                        </div>
+                        <div class="form-group">
+                            <label>Jurusan</label>
+                            <input type="text" name="jurusan" class="form-control {% if nama_err %}is-invalid{% endif %}" value="{{ jurusan }}">
+                            <span class="invalid-feedback">{{ jurusan }}</span>
+                        </div>
+                        <div class="form-group">
+                            <label>Alamat</label>
+                            <textarea name="alamat" class="form-control {% if alamat_err %}is-invalid{% endif %}">{{ alamat }}</textarea>
+                            <span class="invalid-feedback">{{ alamat }}</span>
+                        </div>
+                        <input type="hidden" name="nim" value="{{ nim }}"/>
+                        <input type="submit" class="btn btn-primary" value="Submit">
+                        <a href="{{ url_for('index') }}" class="btn btn-secondary ml-2">Cancel</a>
+                    </form>
+                </div>
+            </div>        
+        </div>
+    </div>
+</body>
+</html>

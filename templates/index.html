@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <div class="wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="mt-5 mb-3 clearfix">
+                        <h2 class="pull-left">Data Mahasiswa</h2>
+                        <a href="create" class="btn btn-success pull-right"><i class="fa fa-plus"></i>Tambah Data Mahasiswa</a>
+                    </div>
+                    {% if pesan=="" %}
+    
+                    {% else %}
+                        <div class="alert alert-danger"><em>{{ pesan }}</em></div>
+                    {% endif %}
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>NIM</th>
+                                <th>Nama</th>
+                                <th>Jurusan</th>
+                                <th>Alamat</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for i in range(jumlah_data) %}
+                            <tr>
+                                <td>{{ data[i][0] }}</td>
+                                <td>{{ data[i][1] }}</td>
+                                <td>{{ data[i][2] }}</td>
+                                <td>{{ data[i][3] }}</td>
+                                <td>
+                                    <form id="view-form-{{ data[i][0] }}" action="{{ url_for('read') }}" method="post" style="display: inline;">
+                                        <input type="hidden" name="nim" value="{{ data[i][0] }}">
+                                        <button type="submit" class="btn-link" title="View Record" style="border:none;" data-toggle="tooltip"><span class="fa fa-eye"></span></button>
+                                    </form>
+                                    <form id="update-form-{{ data[i][0] }}" action="{{ url_for('update_2') }}" method="post" style="display: inline;">
+                                        <input type="hidden" name="nim" value="{{ data[i][0] }}">
+                                        <button type="submit" class="btn-link" title="Update Record" style="border:none;" data-toggle="tooltip"><span class="fa fa-pencil"></span></button>
+                                    </form>
+                                    <form id="delete-form-{{ data[i][0] }}" action="{{ url_for('delete') }}" method="post" style="display: inline;">
+                                        <input type="hidden" name="nim" value="{{ data[i][0] }}">
+                                        <button type="submit" class="btn-link" title="Delete Record" style="border:none;" data-toggle="tooltip"><span class="fa fa-trash"></span></button>
+                                    </form>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

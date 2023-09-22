@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Record</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .wrapper{
+            width: 600px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2 class="mt-5">Update Record</h2>
+                    <p>Silahkan Masukan Data Update</p>
+                    {% if pesan=="" %}
+    
+                    {% else %}
+                        <div class="alert alert-danger"><em>{{ pesan }}</em></div>
+                    {% endif %}
+                    <form action="{{ url_for('update') }}" method="post">
+                        <div class="form-group">
+                            <label>Nama</label>
+                            <input type="text" name="f_nama" class="form-control {% if nama_err %}is-invalid{% endif %}" value="{{ nama }}">
+                            <span class="invalid-feedback">{{ nama_err }}</span>
+                        </div>
+                        <div class="form-group">
+                            <label>Jurusan</label>
+                            <textarea name="f_jurusan" class="form-control {% if jurusan_err %}is-invalid{% endif %}" value="{{ jurusan }}"></textarea>
+                            <span class="invalid-feedback">{{ jurusan_err }}</span>
+                        </div>
+                        <div class="form-group">
+                            <label>Alamat</label>
+                            <textarea name="f_alamat" class="form-control {% if alamat_err %}is-invalid{% endif %}">{{ alamat }}</textarea>
+                            <span class="invalid-feedback">{{ alamat_err }}</span>
+                        </div>
+                        <input type="hidden" name="nim" value="{{ nim }}"/>
+                        <input type="submit" class="btn btn-primary" value="Submit">
+                        <a href="{{ url_for('index') }}" class="btn btn-secondary ml-2">Cancel</a>
+                    </form>
+                </div>
+            </div>        
+        </div>
+    </div>
+</body>
+</html>
